@@ -1,0 +1,67 @@
+{# Template for Craft 2 for fully accessible HTML slides. #}
+  <div class="page-title-container">
+    <h2>{{ entry.title }}</h2>
+  </div>
+  <div class="clearfix"></div>
+
+{# For some reason, aud.getUrl() works, but slide.slideAudio.getUrl() doesn't. Hence, we need 3 for loops. #}
+{% for slide in entry.slideshow %}
+{% set currentSlide =  loop.index %}
+{% set numSlides = loop.length %}
+{% for aud in slide.slideAudio %}
+{% for tr in slide.slideTranscript %}
+{% if currentSlide == 1 %}
+  <div class="slide-wrapper" id="slide{{currentSlide}}" >
+{% else %}
+  <div class="slide-wrapper hide" id="slide{{currentSlide}}">
+{% endif %}
+  <div class="body-content slide-body">
+    {# TODO: Should we fix a height for the slides? Long slides might break the mold #}
+    {{slide.slideBody}}
+  </div>
+
+  <div class="body-content" id="controls-wrapper">
+    <div class="audio-wrapper">
+    <audio preload="auto" data-able-player data-lyrics-mode data-transcript-div="transcript{{currentSlide}}">
+      <source type="audio/mpeg" src="{{aud.getUrl()}}"/>
+    {% set req_url = siteUrl ~"file/get_file?path="~tr.getUrl() %}
+      <track kind="captions" src="{{req_url}}" srclang="en" label="English" />
+    </audio>
+
+  </div>
+    <div class="slide-btn-wrapper">
+      {# Disable the previous slide button if on the first slide #}
+      {% if currentSlide == 1 %}
+      <button class="btn-slide-ctrl btn-slide-nav" aria-label="Previous Slide" disabled> &lt; </button>
+      {% else %}
+      <button class="btn-slide-ctrl btn-slide-nav btn-slide-prev" data-id="{{currentSlide-1}}" aria-label="Previous Slide"> &lt; </button>
+      {% endif %}
+
+      <p class="btn-slide-ctrl" >Slide {{currentSlide}} / {{numSlides}}</p>
+
+      {# Disable next slide button if on the last slide #}
+      {% if currentSlide == numSlides %}
+      <button class="btn-slide-ctrl btn-slide-nav" aria-label="Next Slide" disabled> &gt; </button>
+      {% else %}
+      <button class="btn-slide-ctrl btn-slide-nav btn-slide-next" aria-label="Next Slide" data-id="{{currentSlide+1}}"> &gt; </button>
+      {% endif %}
+
+      {# TODO: Add "Submit" button #}
+      <select class="jumpToSlide" data-parent="{{currentSlide}}" id="selectSlide{{currentSlide}}">
+        <option value="" disabled selected hidden>Jump To Slide</option>
+        {% for s in 1..numSlides %}
+        <option value="{{s}}">Slide {{s}}</option>
+        {% endfor %}
+      </select>
+
+    </div>
+    <div class="clearfix"></div>
+    <div id="transcript{{currentSlide}}"></div>
+  </div>
+</div>
+
+{% endfor %}
+{% endfor %}
+{% endfor %}
+
+  <div style="height: 100px;"></div>
