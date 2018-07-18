@@ -1,0 +1,4 @@
+I can't recreate a working example, as it is hooked up to a Craft installation.
+That being said, all the user sees on the Craft side is a WYSIWYG editor, and a field to upload a transcript for that slide.
+The user can add as many slides as they need to, and it is fully accessible according to WCAG 2.0 standards. This is a much
+more accessible format than just a .pptx when audio is involved. The fact that it's just a webpage helps as well!
