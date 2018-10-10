@@ -19,7 +19,6 @@ form {
 table {
     width: 100%;
     border: 1px solid black;
-    border-radius: 20px;
 }
 
 td {
@@ -29,5 +28,5 @@ td {
 }
 
 tbody tr:nth-child(odd) {
-	background-color: #a2a4a4a4;
+    background-color: #a2a4a4a4;
  }
