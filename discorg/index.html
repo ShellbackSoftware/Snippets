@@ -10,13 +10,13 @@
         <p>Welcome to Smart Fridge! To continue, just provide the item name, as well as the quantity of that item.
         If the item is already in the fridge, then the quantity will be updated to the new value.</p>
         <form name='fridgeForm' ng-submit='addItem(item)'>
-            <label for="brandName">Brand Name
+            <label for="brandName" class="element">Brand Name
                 <input type="textarea" id="brandName" ng-model="item.bName" required/></label>
             <br/>
-            <label for="itemName">Item Name
+            <label for="itemName" class="v-center element">Item Name
             <input type="textarea" id="itemName" ng-model="item.name" required/></label>
             <br/>
-            <label for="itemQuantity">Item Quantity
+            <label for="itemQuantity" class="element">Item Quantity
             <input type="number" id="itemQuantity" ng-model="item.quantity" min="0" required/></label>
             <br/>
             <button type="submit">Submit</button> <button ng-click="resetForm()">Reset</button>

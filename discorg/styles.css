@@ -21,6 +21,26 @@ table {
     border: 1px solid black;
 }
 
+input {
+    max-width: 90%;
+    min-width: 60%;
+}
+
+label {
+    margin-right: 0.5em;
+}
+
+.element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.v-center {
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+
 td {
     width: 25%;
     border: none;
