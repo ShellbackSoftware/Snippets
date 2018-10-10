@@ -1,0 +1,33 @@
+body {
+    background: #616161;
+}
+
+form {
+    width: 50%;
+    margin: auto;
+}
+
+.wrapper {
+    width: 50%;
+    overflow: none;
+    background: #D5EFE7;
+    margin: auto;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+td {
+    width: 25%;
+    border: none;
+    text-align: center;
+}
+
+tbody tr:nth-child(odd) {
+	background-color: #a2a4a4a4;
+ }

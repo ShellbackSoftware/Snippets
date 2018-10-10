@@ -1,0 +1,52 @@
+<!doctype html>
+<html ng-app="smartFridge">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+    <link href="styles.css" rel="stylesheet">
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div ng-controller="mainCtrl" class="wrapper">
+        <p>Welcome to Smart Fridge! To continue, just provide the item name, as well as the quantity of that item.
+        If the item is already in the fridge, then the quantity will be updated to the new value.</p>
+        <form name='fridgeForm' ng-submit='addItem(item)'>
+            <label for="brandName">Brand Name
+                <input type="textarea" id="brandName" ng-model="item.bName" required/></label>
+            <br/>
+            <label for="itemName">Item Name
+            <input type="textarea" id="itemName" ng-model="item.name" required/></label>
+            <br/>
+            <label for="itemQuantity">Item Quantity
+            <input type="number" id="itemQuantity" ng-model="item.quantity" min="0" required/></label>
+            <br/>
+            <button type="submit">Submit</button> <button ng-click="resetForm()">Reset</button>
+        </form>
+        <p>Current items in the fridge are listed below. You can click on each row to fill in the form above for quick editing.  <button ng-click="resetFridge()">Reset Fridge</button><br/></p> 
+        <p ng-show="!fridgeItems.length && !showEmpty">Looks like the fridge is empty!</p>
+        <table ng-show="fridgeItems.length && !showEmpty">
+            <thead>
+                <th>          
+                    <a href="#" ng-click="orderByField='brand'; reverseSort = !reverseSort">
+                    Brand Name <span ng-show="orderByField == 'brand'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span> </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='type'; reverseSort = !reverseSort">
+                        Item Name 
+                        <span ng-show="orderByField == 'type'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span> </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='qty'; reverseSort = !reverseSort">
+                        Quantity <span ng-show="orderByField == 'qty'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                        </a>
+                </th>
+            </thead>
+            <tr ng-repeat="i in fridgeItems |orderBy:orderByField:reverseSort" ng-click="fillForm(i)">
+                <td>{{ i.brand | camel }}</td>
+                <td>{{ i.type | camel }}</td>
+                <td>{{ i.qty }}</td>
+                <td><button ng-click="removeItem($index)">Remove</button></td>
+            </tr>
+        </table>
+    </div>
+  </body>
+</html>
